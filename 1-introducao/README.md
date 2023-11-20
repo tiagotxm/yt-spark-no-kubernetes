@@ -2,6 +2,7 @@
 - Instalar o [docker](https://docs.docker.com/)
 - Instalar o [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - Instalar o [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- Instalar o [Lens](https://k8slens.dev/)
 
 Opcional: https://github.com/ahmetb/kubectx
 
