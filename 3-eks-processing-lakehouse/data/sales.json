@@ -1,9 +1,7 @@
-[
-  {"store": "A", "product_id": 1, "date": "2023-01-01", "sales": 10},
+[{"store": "A", "product_id": 1, "date": "2023-01-01", "sales": 10},
   {"store": "A", "product_id": 2, "date": "2023-01-01", "sales": 20},
   {"store": "B", "product_id": 3, "date": "2023-01-01", "sales": 15},
   {"store": "A", "product_id": 1, "date": "2023-01-02", "sales": 15},
   {"store": "B", "product_id": 2, "date": "2023-01-02", "sales": 25},
   {"store": "A", "product_id": 4, "date": "2023-01-02", "sales": 10},
-  {"store": "B", "product_id": 5, "date": "2023-01-02", "sales": 30}
-]
+  {"store": "B", "product_id": 5, "date": "2023-01-02", "sales": 30}]
