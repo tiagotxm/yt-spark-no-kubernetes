@@ -1,0 +1,7 @@
+[
+  {"product_id": 1, "name": "Laptop", "price": 800},
+  {"product_id": 2, "name": "Smartphone", "price": 500},
+  {"product_id": 3, "name": "Tablet", "price": 300},
+  {"product_id": 4, "name": "Headphones", "price": 100},
+  {"product_id": 5, "name": "Smartwatch", "price": 200}
+]
