@@ -3,10 +3,10 @@ ARG JRE_VERSION=11-jre-slim-buster
 
 FROM openjdk:${JRE_VERSION} AS base
 
-ARG SPARK_VERSION_DEFAULT=3.5.1
+ARG SPARK_VERSION_DEFAULT=3.5.3
 ARG HADOOP_VERSION_DEFAULT=3
-ARG HADOOP_AWS_VERSION_DEFAULT=3.2.0
-ARG AWS_SDK_BUNDLE_VERSION_DEFAULT=1.11.375
+ARG HADOOP_AWS_VERSION_DEFAULT=3.3.4
+ARG AWS_SDK_BUNDLE_VERSION_DEFAULT=1.12.262
 
 # Define ENV variables
 ENV SPARK_VERSION=${SPARK_VERSION_DEFAULT}
@@ -46,6 +46,7 @@ FROM sparkbuilder AS spark-with-s3
 # Download S3 and GCS jars
 RUN curl -L https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/${HADOOP_AWS_VERSION}/hadoop-aws-${HADOOP_AWS_VERSION}.jar -o ${SPARK_HOME}/jars/hadoop-aws-${HADOOP_AWS_VERSION}.jar \
     && curl -L https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/${AWS_SDK_BUNDLE_VERSION}/aws-java-sdk-bundle-${AWS_SDK_BUNDLE_VERSION}.jar -o ${SPARK_HOME}/jars/aws-java-sdk-bundle-${AWS_SDK_BUNDLE_VERSION}.jar \
+    && curl -L https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.17.0/jmx_prometheus_javaagent-0.17.0.jar -o ${SPARK_HOME}/jars/jmx_prometheus_javaagent-0.17.0.jar \
     && rm -rf /var/lib/apt/lists/*
 
 FROM spark-with-s3 AS spark-with-python

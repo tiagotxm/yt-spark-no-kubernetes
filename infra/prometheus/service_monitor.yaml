@@ -1,0 +1,21 @@
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   labels:
+#     name: prometheus
+#   name: svc-monitor-spark-controller
+#   namespace: default
+# spec:
+#   endpoints:
+#   - interval: 30s
+#     targetPort: metrics
+#     path: /metrics
+#     # scheme: https
+#     # tlsConfig:
+#     #     insecureSkipVerify: true
+#   namespaceSelector:
+#     matchNames:
+#       - spark-operator
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/instance: spark-operator

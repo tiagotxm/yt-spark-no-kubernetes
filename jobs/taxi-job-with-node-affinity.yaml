@@ -1,0 +1,58 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: taxi-with-node-affinity5
+  namespace: spark-jobs
+spec:
+  deps:
+    packages:
+      - org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.7.0
+  type: Python
+  mode: cluster
+  image: "tiagotxm/spark:3.5.3-hadoop-aws3.3.4-sdk1.12.262"
+  imagePullPolicy: Always
+  mainApplicationFile: "s3a://yt-lakehouse/scripts/test-iceberg.py"
+  sparkConf:
+    spark.hadoop.fs.s3a.path.style.access: "True"
+    spark.hadoop.fs.s3a.fast.upload: "True"
+    spark.hadoop.fs.s3a.multipart.size: "104857600"
+    fs.s3a.connection.maximum: "100"
+    spark.hadoop.fs.s3.impl: "org.apache.hadoop.fs.s3a.S3AFileSystem"
+    spark.hadoop.fs.s3a.impl: "org.apache.hadoop.fs.s3a.S3AFileSystem"
+    spark.hadoop.fs.s3a.aws.credentials.provider: "com.amazonaws.auth.WebIdentityTokenCredentialsProvider"
+  sparkVersion: 3.5.3
+  restartPolicy:
+    type: Never
+  driver:
+    cores: 1
+    memory: 16g
+    labels:
+      version: 3.5.3
+      job_name: taxi-with-node-affinity
+    serviceAccount: spark-operator-spark
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: 'karpenter.sh/capacity-type'
+                  operator: In
+                  values:
+                    - on-demand
+      
+  executor:
+    cores: 1
+    instances: 1
+    memory: 16g
+    labels:
+      version: 3.5.3
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: 'karpenter.sh/capacity-type'
+                  operator: In
+                  values:
+                    - spot
+    

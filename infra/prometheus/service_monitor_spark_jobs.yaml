@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: spark-servicemonitor
+  #namespace: spark-jobs
+spec:
+  namespaceSelector:
+    matchNames:
+      - spark-jobs
+  selector:
+    matchLabels:
+      #sparkoperator.k8s.io/launched-by-spark-operator: true
+      type: spark-job
+  endpoints:
+    - port: "metrics"
+      # path: /metrics/prometheus
+      # interval: 5s

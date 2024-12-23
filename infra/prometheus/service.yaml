@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-metrics-svc
+  namespace: spark-jobs
+  labels:
+    app: spark-job
+spec:
+  selector:
+    type: spark-job
+  ports:
+    - name: metrics
+      port: 8090
+      targetPort: 8090
+  selector:
+    type: spark-job

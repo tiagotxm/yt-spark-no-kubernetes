@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: podmonitor-spark-job
+  namespace: default
+spec:
+  namespaceSelector:
+    matchNames:
+    - spark-jobs
+  selector:
+    matchLabels:
+      monitored-by: prometheus
+  podMetricsEndpoints:
+  - port: "jmx-exporter"
+    path: "/metrics"
+  - port: "spark-ui"
+    path: "/metrics/prometheus"
+    # metricRelabelings:
+    # - regex: (metrics_)(.*)(_driver)(.*)
+    #   replacement: bridge$3$4
+    #   sourceLabels: [ __name__ ]
+    #   targetLabel: __name__
+  - port: "spark-ui"
+    path: "/metrics/executors/prometheus"
+    # metricRelabelings:
+    # - regex: (metrics)(.*)
+    #   replacement: bridge$2
+    #   sourceLabels: [ __name__ ]
+    #   targetLabel: __name__
