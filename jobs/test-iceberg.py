@@ -21,10 +21,8 @@ def create_spark_session():
     return spark
 
 def main():
-    # Initialize Spark session
     spark = create_spark_session()
     
-    # Define schema
     schema = StructType([
         StructField("vendor_id", LongType(), True),
         StructField("trip_id", LongType(), True),
@@ -33,11 +31,9 @@ def main():
         StructField("store_and_fwd_flag", StringType(), True)
     ])
     
-    # Create an empty DataFrame with the schema
     df = spark.createDataFrame([], schema)
     df.write.format("iceberg").mode("overwrite").save("demo.nyc.taxis")
     
-    # Define sample data
     data = [
         (1, 1000371, 1.8, 15.32, "N"),
         (2, 1000372, 2.5, 22.15, "N"),
@@ -45,12 +41,10 @@ def main():
         (1, 1000374, 8.4, 42.13, "Y")
     ]
     
-    # Append data to the Iceberg table
     schema = spark.table("demo.nyc.taxis").schema
     df = spark.createDataFrame(data, schema)
     df.writeTo("demo.nyc.taxis").append()
     
-    # Show the data
     spark.table("demo.nyc.taxis").show()
 
 if __name__ == "__main__":

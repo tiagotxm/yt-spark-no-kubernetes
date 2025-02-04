@@ -4,13 +4,13 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::763828354275:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/9B02D4B6EE564C166F5FEA914ACCCBD1"
+        "Federated": "arn:aws:iam::763828354275:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/8DAB35CD413CD55FED7AD37ACF3B2311"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.us-east-1.amazonaws.com/id/9B02D4B6EE564C166F5FEA914ACCCBD1:aud": "sts.amazonaws.com",
-          "oidc.eks.us-east-1.amazonaws.com/id/9B02D4B6EE564C166F5FEA914ACCCBD1:sub": "system:serviceaccount:spark-jobs:allow-s3"
+          "oidc.eks.us-east-1.amazonaws.com/id/8DAB35CD413CD55FED7AD37ACF3B2311:aud": "sts.amazonaws.com",
+          "oidc.eks.us-east-1.amazonaws.com/id/8DAB35CD413CD55FED7AD37ACF3B2311:sub": "system:serviceaccount:spark-jobs:spark-operator-spark"
         }
       }
     }

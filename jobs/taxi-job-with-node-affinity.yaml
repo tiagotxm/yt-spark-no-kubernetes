@@ -1,7 +1,7 @@
 apiVersion: sparkoperator.k8s.io/v1beta2
 kind: SparkApplication
 metadata:
-  name: taxi-with-node-affinity5
+  name: taxi-with-node-affinity-2
   namespace: spark-jobs
 spec:
   deps:
@@ -42,8 +42,8 @@ spec:
       
   executor:
     cores: 1
-    instances: 1
-    memory: 16g
+    instances: 10
+    memory: 16gb
     labels:
       version: 3.5.3
     affinity:
