@@ -73,15 +73,27 @@ metadata:
   name: spark-pi
   namespace: default
 spec:
-  type: Scala
+  type: Python
   mode: cluster
-  image: "gcr.io/spark-operator/spark:v3.1.1"
-  mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/jars/spark-examples_2.12-3.1.1.jar"
-  sparkConf:
-    "spark.executor.instances": "2"
+  image: "tiagotxm/spark:3.5.3-demo-yt"
+  imagePullPolicy: Always
+  mainApplicationFile: "local:///opt/spark/examples/src/main/python/pi.py"
+  sparkVersion: "3.5.3"
   restartPolicy:
     type: Never
+  driver:
+    cores: 1
+    coreLimit: "1200m"
+    memory: "512m"
+    labels:
+      version: 3.5.3
+    serviceAccount: spark-operator-spark
+  executor:
+    cores: 1
+    instances: 1
+    memory: "512m"
+    labels:
+      version: 3.5.3
 
 ```
 
@@ -173,9 +185,9 @@ kubectl delete sparkapplication <spark-app-name>
 ### 🔹 Criando um Dockerfile
 
 - Para criar uma imagem base do Spark, utilize este
-[Dockerfile](Dockerfile)
+[Dockerfile](Dockerfile.base)
 
-- Para instalar dependências do Iceberg, utilize este [Dockerfile.iceberg](Dockerfile.iceberg)
+- Para instalar dependências do Iceberg, utilize este [Dockerfile.iceberg](Dockerfile)
 
 
 

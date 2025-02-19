@@ -6,7 +6,7 @@ metadata:
 spec:
   type: Python
   mode: cluster
-  image: "tiagotxm/spark:3.5.3-demo-yt"
+  image: "apache/spark-py:latest"
   imagePullPolicy: Always
   mainApplicationFile: "local:///opt/spark/examples/src/main/python/pi.py"
   sparkVersion: "3.5.3"
