@@ -256,8 +256,8 @@ $ ssh-keygen -t rsa -b 4096 -C "<github_email>"
 
 
 ### Links úteis e Referências
-- K9s
-- Karpenter
+- K9s - https://k9scli.io
+- Karpenter - https://karpenter.sh/docs/
 - IRSA - https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
 
 
